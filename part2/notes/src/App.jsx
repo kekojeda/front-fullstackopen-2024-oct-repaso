@@ -1,11 +1,21 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Note } from "./components/Note"
+import axios from "axios"
 
-const App = (props) => {
+const App = () => {
 
-  const [notes, setNotes] = useState(props.notes)
+  const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
+
+  useEffect(()=>{
+    axios
+        .get('http://localhost:3001/notes')
+        .then((response)=>{
+          setNotes(response.data)
+        })
+  },[])
+  
 
   const notesToShow = showAll
   ? notes
