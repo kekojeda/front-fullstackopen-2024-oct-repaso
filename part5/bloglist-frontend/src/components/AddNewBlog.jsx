@@ -1,22 +1,27 @@
-const AddNewBlog = () => {
+const AddNewBlog = ({handleNewBlog, title, setTitle,author, setAuthor, url, setUrl}) => {
   return (
     <>
-      <form onSubmit={handleAddBlog}>
-        <div>
-          title
-          <input value={newNote} onChange={handleNoteChange} />
-        </div>
-        <div>
-          password
-          <input
-            type="password"
-            value={password}
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
-        </div>
-        <button type="submit">login</button>
-      </form>
+       <form onSubmit={handleNewBlog}>
+            <div>
+              title
+              <input value={title} onChange={({ target }) => setTitle(target.value)} />
+            </div>
+            <div>
+              author
+              <input
+                value={author}
+                onChange={({ target }) => setAuthor(target.value)}
+              />
+            </div>
+            <div>
+              url
+              <input
+                value={url}
+                onChange={({ target }) => setUrl(target.value)}
+              />
+            </div>
+            <button type="submit">Crear Blog</button>
+          </form>
     </>
   );
 };
