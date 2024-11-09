@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import { LoginForm } from './components/LoginForm'
 import loginService from './services/login'
 import { AddNewBlog } from './components/AddNewBlog'
 import { Notification } from './components/Notification'
+import { Togglable } from './components/Toggleable'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -21,6 +22,9 @@ const App = () => {
   const [colorNoti, setColorNoti] = useState("")
 
   const [newBlog, setNewBlog] = useState()
+
+  const noteFormRef = useRef()
+  
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -40,6 +44,7 @@ const App = () => {
 
   const handleNewBlog = (event) => {
     event.preventDefault()
+    noteFormRef.current.toggleVisibility()
     const blogObject = {
       title: title,
       author: author,
@@ -119,16 +124,19 @@ const App = () => {
               <Blog key={blog.id} blog={blog} />
             )}
           </div>
+          <Togglable buttonLabel="new blog" ref={noteFormRef}>
+            <AddNewBlog
+              handleNewBlog={handleNewBlog}
+              title={title}
+              setTitle={setTitle}
+              author={author}
+              setAuthor={setAuthor}
+              url={url}
+              setUrl={setUrl}
+            />
 
-          <AddNewBlog
-            handleNewBlog={handleNewBlog}
-            title={title}
-            setTitle={setTitle}
-            author={author}
-            setAuthor={setAuthor}
-            url={url}
-            setUrl={setUrl}
-          />
+          </Togglable>
+
         </div>
 
       }
