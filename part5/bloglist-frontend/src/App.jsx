@@ -53,14 +53,14 @@ const App = () => {
         setMsgNoti(`el blog ${title} by ${author} se agrego correctamente`)
         setColorNoti('green')
         setNotification(true)
-        
+
         setTimeout(() => {
           setNotification(false)
         }, 5000)
         setTitle("")
         setAuthor("")
         setUrl("")
-        
+
       })
 
   }
@@ -88,19 +88,19 @@ const App = () => {
       setPassword('')
     } catch (exception) {
       setMsgNoti(`wrong username or password`)
-        setColorNoti('red')
-        setNotification(true)
-        
-        setTimeout(() => {
-          setNotification(false)
-        }, 5000)
-     
+      setColorNoti('red')
+      setNotification(true)
+
+      setTimeout(() => {
+        setNotification(false)
+      }, 5000)
+
     }
   }
 
   return (
     <div>
-      {notification && <Notification msg={msgNoti} color={colorNoti}/>}
+      {notification && <Notification msg={msgNoti} color={colorNoti} />}
       {user === null
         ?
         <LoginForm
