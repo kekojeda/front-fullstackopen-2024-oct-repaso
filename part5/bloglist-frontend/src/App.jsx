@@ -82,14 +82,19 @@ const App = () => {
       window.localStorage.setItem(
         'loggedNoteappUser', JSON.stringify(user)
       )
+      blogService.setToken(user.token)
       setUser(user)
       setUsername('')
       setPassword('')
     } catch (exception) {
-      setErrorMessage('Wrong credentials')
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
+      setMsgNoti(`wrong username or password`)
+        setColorNoti('red')
+        setNotification(true)
+        
+        setTimeout(() => {
+          setNotification(false)
+        }, 5000)
+     
     }
   }
 
