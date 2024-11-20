@@ -1,5 +1,40 @@
-const AddNewBlog = ({handleNewBlog, title, setTitle,author, setAuthor, url, setUrl}) => {
+import { useState } from "react";
+import blogService from '../services/blogs'
 
+const AddNewBlog = ({noteFormRef,setBlogs, blogs,setMsgNoti,setColorNoti,setNotification}) => {
+
+  const [title, setTitle] = useState("")
+  const [author, setAuthor] = useState("")
+  const [url, setUrl] = useState("")
+
+  const handleNewBlog = (event) => {
+    event.preventDefault()
+    noteFormRef.current.toggleVisibility()
+    const blogObject = {
+      title: title,
+      author: author,
+      url: url,
+    }
+
+    blogService
+      .create(blogObject)
+      .then(returnedBlog => {
+        setBlogs(blogs.concat(returnedBlog))
+        setMsgNoti(`el blog ${title} by ${author} se agrego correctamente`)
+        setColorNoti('green')
+        setNotification(true)
+
+        setTimeout(() => {
+          setNotification(false)
+        }, 5000)
+        setTitle("")
+        setAuthor("")
+        setUrl("")
+
+      })
+
+  }
+  
   
   return (
     <>
