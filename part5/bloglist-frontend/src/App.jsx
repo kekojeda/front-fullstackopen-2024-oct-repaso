@@ -14,9 +14,7 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  // const [title, setTitle] = useState("")
-  // const [author, setAuthor] = useState("")
-  // const [url, setUrl] = useState("")
+  
 
   const [notification, setNotification] = useState(false)
   const [msgNoti, setMsgNoti] = useState("")
@@ -43,34 +41,7 @@ const App = () => {
   }, [])
 
 
-  // const handleNewBlog = (event) => {
-  //   event.preventDefault()
-  //   noteFormRef.current.toggleVisibility()
-  //   const blogObject = {
-  //     title: title,
-  //     author: author,
-  //     url: url,
-  //   }
-
-  //   blogService
-  //     .create(blogObject)
-  //     .then(returnedBlog => {
-  //       setBlogs(blogs.concat(returnedBlog))
-  //       setMsgNoti(`el blog ${title} by ${author} se agrego correctamente`)
-  //       setColorNoti('green')
-  //       setNotification(true)
-
-  //       setTimeout(() => {
-  //         setNotification(false)
-  //       }, 5000)
-  //       setTitle("")
-  //       setAuthor("")
-  //       setUrl("")
-
-  //     })
-
-  // }
-
+ 
 
 
   const handleLogOff = () => {
@@ -120,7 +91,7 @@ const App = () => {
           <div>
             <p>{user.name} logged-in</p>
             <button onClick={handleLogOff}>Log off</button>
-            <BlogList blogs={blogs}/>
+            <BlogList blogs={blogs} setBlogs={setBlogs}/>
           </div>
           <Togglable buttonLabel="new blog" ref={noteFormRef}>
             <AddNewBlog
