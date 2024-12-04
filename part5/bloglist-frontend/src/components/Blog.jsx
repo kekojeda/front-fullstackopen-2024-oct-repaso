@@ -74,15 +74,15 @@ const Blog = ({ blog, setBlogs, blogs, user }) => {
 
   return (
 
-    <div style={blogStyle}>
-      <p>{blog.title} <ButtonHide /></p>
+    <div style={blogStyle} className="blog">
+      <p className="blogTitle">{blog.title} <ButtonHide /></p>
       {
         detailEnabled && (
-          <div>
+          <div className="blogDetails">
             <h4>Blog Detail</h4>
-            <p>URL: {blog.url}</p>
-            <p>Likes: {blog.likes} <button onClick={handleLikes}>Like</button></p>
-            <p>Author: {blog.author}</p>
+            <p className="blogUrl">URL: {blog.url}</p>
+            <p className="blogLikes">Likes: {blog.likes} <button onClick={handleLikes}>Like</button></p>
+            <p className="blogAuthor">Author: {blog.author}</p>
 
             <ButtonDelete />
           </div>
