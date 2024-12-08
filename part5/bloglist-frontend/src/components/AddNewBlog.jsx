@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState } from 'react'
 import blogService from '../services/blogs'
 
-const AddNewBlog = ({noteFormRef,setBlogs, blogs,setMsgNoti,setColorNoti,setNotification}) => {
+const AddNewBlog = ({ noteFormRef,setBlogs, blogs,setMsgNoti,setColorNoti,setNotification }) => {
 
-  const [title, setTitle] = useState("")
-  const [author, setAuthor] = useState("")
-  const [url, setUrl] = useState("")
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [url, setUrl] = useState('')
 
   const handleNewBlog = (event) => {
     event.preventDefault()
@@ -27,40 +27,40 @@ const AddNewBlog = ({noteFormRef,setBlogs, blogs,setMsgNoti,setColorNoti,setNoti
         setTimeout(() => {
           setNotification(false)
         }, 5000)
-        setTitle("")
-        setAuthor("")
-        setUrl("")
+        setTitle('')
+        setAuthor('')
+        setUrl('')
 
       })
 
   }
-  
-  
+
+
   return (
     <>
-       <form onSubmit={handleNewBlog}>
-            <div>
+      <form onSubmit={handleNewBlog}>
+        <div>
               title
-              <input value={title} onChange={({ target }) => setTitle(target.value)} />
-            </div>
-            <div>
+          <input value={title} onChange={({ target }) => setTitle(target.value)} />
+        </div>
+        <div>
               author
-              <input
-                value={author}
-                onChange={({ target }) => setAuthor(target.value)}
-              />
-            </div>
-            <div>
+          <input
+            value={author}
+            onChange={({ target }) => setAuthor(target.value)}
+          />
+        </div>
+        <div>
               url
-              <input
-                value={url}
-                onChange={({ target }) => setUrl(target.value)}
-              />
-            </div>
-            <button type="submit">Crear Blog</button>
-          </form>
+          <input
+            value={url}
+            onChange={({ target }) => setUrl(target.value)}
+          />
+        </div>
+        <button type="submit">Crear Blog</button>
+      </form>
     </>
-  );
-};
+  )
+}
 
-export { AddNewBlog };
+export { AddNewBlog }

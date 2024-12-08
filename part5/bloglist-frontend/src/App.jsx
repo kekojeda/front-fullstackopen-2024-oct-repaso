@@ -8,22 +8,24 @@ import { Notification } from './components/Notification'
 import { Togglable } from './components/Toggleable'
 import { BlogList } from './components/BlogList'
 
+
+
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  
+
 
   const [notification, setNotification] = useState(false)
-  const [msgNoti, setMsgNoti] = useState("")
-  const [colorNoti, setColorNoti] = useState("")
+  const [msgNoti, setMsgNoti] = useState('')
+  const [colorNoti, setColorNoti] = useState('')
 
   const [newBlog, setNewBlog] = useState()
 
   const noteFormRef = useRef()
-  
+
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -41,7 +43,7 @@ const App = () => {
   }, [])
 
 
- 
+
 
 
   const handleLogOff = () => {
@@ -64,7 +66,7 @@ const App = () => {
       setUsername('')
       setPassword('')
     } catch (exception) {
-      setMsgNoti(`wrong username or password`)
+      setMsgNoti('wrong username or password')
       setColorNoti('red')
       setNotification(true)
 
@@ -95,12 +97,12 @@ const App = () => {
           </div>
           <Togglable buttonLabel="new blog" ref={noteFormRef}>
             <AddNewBlog
-            noteFormRef = {noteFormRef}
-            setBlogs={setBlogs}
-            blogs={blogs}
-            setMsgNoti={setMsgNoti}
-            setNotification={setNotification}
-            setColorNoti={setColorNoti}
+              noteFormRef = {noteFormRef}
+              setBlogs={setBlogs}
+              blogs={blogs}
+              setMsgNoti={setMsgNoti}
+              setNotification={setNotification}
+              setColorNoti={setColorNoti}
               // handleNewBlog={handleNewBlog}
             />
 
