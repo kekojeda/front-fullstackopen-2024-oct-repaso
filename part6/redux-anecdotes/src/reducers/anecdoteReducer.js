@@ -20,7 +20,7 @@ const asObject = (anecdote) => {
 export const voteAnecdote = (id) => {
   return{
     type: 'VOTE',
-    playload: {id}
+    payload: {id}
   }
 }
 
@@ -33,15 +33,15 @@ export const addAnecdote = (content) => {
 const initialState = anecdotesAtStart.map(asObject)
 
 
-const reducer = (state = initialState, action) => {
-  console.log('state now: ', state)
-  console.log('action', action)
+const AnecdoteReducer = (state = initialState, action) => {
+  // console.log('state now: ', state)
+  // console.log('action', action)
 
 
   switch (action.type) {
     case 'VOTE':{
       // Encuentra la anécdota que se votó
-      const id = action.playload.id
+      const id = action.payload.id
       const anecdoteToVote = state.find((anecdote) => anecdote.id === id)
 
       //incrementar los votos de esa anecdota
@@ -65,4 +65,4 @@ const reducer = (state = initialState, action) => {
  }
 }
 
-export default reducer
+export default AnecdoteReducer
