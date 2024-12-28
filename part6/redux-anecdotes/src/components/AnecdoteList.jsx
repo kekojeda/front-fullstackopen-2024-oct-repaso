@@ -15,7 +15,7 @@ const AnecdoteList = () => {
   }
     return (
         <>
-        {anecdotes
+        {/* {anecdotes
         .slice()
         .sort((a,b) => b.votes - a.votes) //ordenar de mayor a menos
         .filter((anecdote)=>anecdote.content.toLowerCase().includes(filter.toLowerCase()))
@@ -29,7 +29,7 @@ const AnecdoteList = () => {
             <button onClick={() => vote(anecdote.id)}>vote</button>
           </div>
         </div>
-      )}
+      )} */}
         </>
     )
 }
