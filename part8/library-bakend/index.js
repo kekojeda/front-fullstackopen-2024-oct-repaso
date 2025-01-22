@@ -1,6 +1,8 @@
 const { ApolloServer } = require('@apollo/server')
 const { startStandaloneServer } = require('@apollo/server/standalone')
 
+const { v1: uuid } = require('uuid')
+
 let authors = [
   {
     name: 'Robert Martin',
@@ -100,6 +102,7 @@ let books = [
 const typeDefs = `
   type Author {
     name: String!
+    born: Int
     bookCount: Int!
   }
 
@@ -119,6 +122,16 @@ const typeDefs = `
     authorCount: Int!
     allBooks(author: String, genre: String): [Book!]!
     allAuthors: [Author!]!
+  }
+
+  type Mutation {
+    addBook(
+      title: String!
+      author: String!
+      published: Int!
+      genres: [String!]!
+    ): Book!
+    editAuthor(name: String!, setBornTo: Int!): Author
   }
 `
 
@@ -148,7 +161,52 @@ const resolvers = {
             bookCount: books.filter(book => book.author === author.name).length,
         }))
     },
-  }
+  },
+  Mutation: {
+    addBook: (parent, args) => {
+      const { title, author, published, genres } = args;
+
+      // Verificar si el autor ya existe
+      let authorExists = authors.find(a => a.name === author);
+      if (!authorExists) {
+        const newAuthor = {
+          name: author,
+          id: uuid(),
+          born: null, // No hay información de nacimiento
+        };
+        authors.push(newAuthor);
+      }
+
+      // Crear el nuevo libro
+      const newBook = {
+        title,
+        author,
+        published,
+        genres,
+        id: uuid(),
+      };
+      books.push(newBook);
+
+      return newBook;
+    },
+    editAuthor: (parent, args) => {
+      const { name, setBornTo } = args;
+
+      // Buscar al autor por nombre
+      const author = authors.find(author => author.name === name);
+
+      if (!author) {
+        // Si no se encuentra el autor, devolver null
+        return null;
+      }
+
+      // Actualizar el año de nacimiento
+      author.born = setBornTo;
+
+      // Devolver el autor editado
+      return author;
+    },
+  },
 }
 
 const server = new ApolloServer({
